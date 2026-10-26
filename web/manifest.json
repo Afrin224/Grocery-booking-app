@@ -1,11 +1,11 @@
 {
-    "name": "first_app",
-    "short_name": "first_app",
+    "name": "FreshMart - Grocery Booking & Delivery",
+    "short_name": "FreshMart",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "background_color": "#101912",
+    "theme_color": "#1E824C",
+    "description": "Book fresh organic groceries delivered directly to your doorstep with express delivery.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

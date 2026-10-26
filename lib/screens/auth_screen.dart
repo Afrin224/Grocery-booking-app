@@ -1,4 +1,4 @@
-import 'dart:io';
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -22,7 +22,7 @@ class _AuthScreenState extends State<AuthScreen> {
   var _enteredPassword = '';
   var _enteredUsername = '';
   var _obscurePassword = true;
-  File? _selectedImage;
+  Uint8List? _selectedImageBytes;
   var _isAuthenticating = false;
 
   void _submit() async {
@@ -50,14 +50,17 @@ class _AuthScreenState extends State<AuthScreen> {
         );
 
         String? imageUrl;
-        if (_selectedImage != null) {
+        if (_selectedImageBytes != null) {
           try {
             final storageRef = FirebaseStorage.instance
                 .ref()
                 .child('user_images')
                 .child('${userCredentials.user!.uid}.jpg');
 
-            await storageRef.putFile(_selectedImage!);
+            await storageRef.putData(
+              _selectedImageBytes!,
+              SettableMetadata(contentType: 'image/jpeg'),
+            );
             imageUrl = await storageRef.getDownloadURL();
           } catch (_) {
             // Storage upload can fail if rules are not set; continue smoothly
@@ -288,8 +291,8 @@ class _AuthScreenState extends State<AuthScreen> {
                             // Image picker on signup
                             if (!_isLogin) ...[
                               UserImagePicker(
-                                onPickImage: (pickedImage) {
-                                  _selectedImage = pickedImage;
+                                onPickImage: (pickedImageBytes) {
+                                  _selectedImageBytes = pickedImageBytes;
                                 },
                               ),
                               const SizedBox(height: 12),

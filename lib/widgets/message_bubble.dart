@@ -20,18 +20,10 @@ class MessageBubble extends StatelessWidget {
         userImage = null,
         username = null;
 
-  // Whether or not this message bubble is the first in a sequence of messages
-  // from the same user.
   final bool isFirstInSequence;
-
-  // Image of the user.
   final String? userImage;
-
-  // Username of the user.
   final String? username;
   final String message;
-
-  // Controls how the MessageBubble will be aligned.
   final bool isMe;
 
   @override
@@ -40,25 +32,20 @@ class MessageBubble extends StatelessWidget {
 
     return Stack(
       children: [
-        if (userImage != null)
+        if (userImage != null && userImage!.isNotEmpty)
           Positioned(
             top: 15,
-            // Align user image to the right, if the message is by me.
             right: isMe ? 0 : null,
             left: !isMe ? 0 : null,
             child: CircleAvatar(
-              backgroundImage: NetworkImage(
-                userImage!,
-              ),
-              backgroundColor: theme.colorScheme.primary.withAlpha(180),
-              radius: 23,
+              backgroundImage: NetworkImage(userImage!),
+              backgroundColor: const Color(0xFF1E824C),
+              radius: 20,
             ),
           ),
         Container(
-          // Add some margin to the edge of the screen, to allow space for the image.
           margin: const EdgeInsets.symmetric(horizontal: 46),
           child: Row(
-            // The side of the chat screen the message should appear at.
             mainAxisAlignment:
                 isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
             children: [
@@ -66,60 +53,60 @@ class MessageBubble extends StatelessWidget {
                 crossAxisAlignment:
                     isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
                 children: [
-                  // First message in the sequence.
-                  if (isFirstInSequence) const SizedBox(height: 18),
-                  if (username != null)
+                  if (isFirstInSequence) const SizedBox(height: 14),
+                  if (username != null && username!.isNotEmpty)
                     Padding(
                       padding: const EdgeInsets.only(
                         left: 13,
                         right: 13,
+                        bottom: 4,
                       ),
                       child: Text(
                         username!,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: Colors.black87,
+                          fontSize: 12,
+                          color: Colors.grey.shade400,
                         ),
                       ),
                     ),
 
-                  // The "speech" bubble surrounding the message.
+                  // Speech bubble
                   Container(
                     decoration: BoxDecoration(
                       color: isMe
-                          ? Colors.grey[300]
-                          : theme.colorScheme.secondary.withAlpha(200),
-                      // Only show rounded corners on the sides away from the sender.
+                          ? const Color(0xFF1E824C)
+                          : theme.cardColor,
                       borderRadius: BorderRadius.only(
                         topLeft: !isMe && isFirstInSequence
                             ? Radius.zero
-                            : const Radius.circular(12),
+                            : const Radius.circular(14),
                         topRight: isMe && isFirstInSequence
                             ? Radius.zero
-                            : const Radius.circular(12),
-                        bottomLeft: const Radius.circular(12),
-                        bottomRight: const Radius.circular(12),
+                            : const Radius.circular(14),
+                        bottomLeft: const Radius.circular(14),
+                        bottomRight: const Radius.circular(14),
                       ),
+                      border: !isMe
+                          ? Border.all(
+                              color: Colors.white.withValues(alpha: 0.08),
+                            )
+                          : null,
                     ),
-                    // Set some maximum width to avoid the bubble taking up the whole screen.
-                    constraints: const BoxConstraints(maxWidth: 200),
+                    constraints: const BoxConstraints(maxWidth: 240),
                     padding: const EdgeInsets.symmetric(
                       vertical: 10,
                       horizontal: 14,
                     ),
-                    // Margin around the bubble.
                     margin: const EdgeInsets.symmetric(
-                      vertical: 4,
-                      horizontal: 12,
+                      vertical: 3,
+                      horizontal: 8,
                     ),
                     child: Text(
                       message,
                       style: TextStyle(
-                        // Add a little line spacing to make the text easier to read.
                         height: 1.3,
-                        color: isMe
-                            ? Colors.black87
-                            : theme.colorScheme.onSecondary,
+                        color: isMe ? Colors.white : Colors.white70,
                       ),
                       softWrap: true,
                     ),

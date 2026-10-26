@@ -2,9 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:first_app/providers/grocery_provider.dart';
 
 class CartScreen extends StatefulWidget {
-  const CartScreen({super.key, this.onBrowseCatalog});
+  const CartScreen({
+    super.key,
+    this.onBrowseCatalog,
+    this.onViewBookings,
+  });
 
   final VoidCallback? onBrowseCatalog;
+  final VoidCallback? onViewBookings;
 
   @override
   State<CartScreen> createState() => _CartScreenState();
@@ -92,8 +97,20 @@ class _CartScreenState extends State<CartScreen> {
           TextButton(
             onPressed: () {
               Navigator.of(ctx).pop();
+              widget.onBrowseCatalog?.call();
             },
-            child: const Text('Done'),
+            child: const Text('Continue Shopping'),
+          ),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: const Color(0xFF1E824C),
+              foregroundColor: Colors.white,
+            ),
+            onPressed: () {
+              Navigator.of(ctx).pop();
+              widget.onViewBookings?.call();
+            },
+            child: const Text('View My Bookings'),
           ),
         ],
       ),

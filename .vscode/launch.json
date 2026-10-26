@@ -1,0 +1,17 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Grocery App (Chrome)",
+      "request": "launch",
+      "type": "dart",
+      "deviceId": "chrome"
+    },
+    {
+      "name": "Grocery App (macOS)",
+      "request": "launch",
+      "type": "dart",
+      "deviceId": "macos"
+    }
+  ]
+}

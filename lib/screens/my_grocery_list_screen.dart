@@ -149,6 +149,7 @@ class MyGroceryListScreen extends StatelessWidget {
                             tooltip: 'Add to Cart for booking',
                             onPressed: () {
                               provider.addToCart(item);
+                              ScaffoldMessenger.of(context).clearSnackBars();
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
                                   content: Text(

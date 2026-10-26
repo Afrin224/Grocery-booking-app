@@ -209,4 +209,82 @@ final groceryItems = [
     imageUrl:
         'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=500&auto=format&fit=crop&q=80',
   ),
+  GroceryItem(
+    id: 'spc_2',
+    name: 'Himalayan Pink Rock Salt',
+    quantity: 1,
+    category: categories[Categories.spices]!,
+    price: 2.49,
+    unit: '500 g',
+    description: 'Pure mineral-rich natural pink mountain salt crystals.',
+    icon: Icons.grain_rounded,
+    imageUrl:
+        'https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=500&auto=format&fit=crop&q=80',
+  ),
+
+  // Convenience Foods
+  GroceryItem(
+    id: 'cnv_1',
+    name: 'Organic Rolled Oats',
+    quantity: 1,
+    category: categories[Categories.convenience]!,
+    price: 3.19,
+    unit: '1 kg',
+    description: 'Hearty whole-grain rolled oats for healthy morning breakfasts.',
+    icon: Icons.rice_bowl_rounded,
+    imageUrl:
+        'https://images.unsplash.com/photo-1586201375761-83865001e31c?w=500&auto=format&fit=crop&q=80',
+  ),
+  GroceryItem(
+    id: 'cnv_2',
+    name: 'Canned Organic Tomato Soup',
+    quantity: 1,
+    category: categories[Categories.convenience]!,
+    price: 2.29,
+    unit: '400 ml',
+    description: 'Ready to heat and serve classic creamy organic tomato soup.',
+    icon: Icons.soup_kitchen_rounded,
+    imageUrl:
+        'https://images.unsplash.com/photo-1547592166-23ac45744acd?w=500&auto=format&fit=crop&q=80',
+  ),
+
+  // Hygiene & Personal Care
+  GroceryItem(
+    id: 'hyg_1',
+    name: 'Aloe Vera Hand Wash',
+    quantity: 1,
+    category: categories[Categories.hygiene]!,
+    price: 3.99,
+    unit: '500 ml',
+    description: 'Gentle antibacterial foaming hand wash with soothing aloe.',
+    icon: Icons.clean_hands_rounded,
+    imageUrl:
+        'https://images.unsplash.com/photo-1608248597359-bb5b6d910bb3?w=500&auto=format&fit=crop&q=80',
+  ),
+  GroceryItem(
+    id: 'hyg_2',
+    name: 'Eco Bamboo Toothbrushes (Pack of 4)',
+    quantity: 1,
+    category: categories[Categories.hygiene]!,
+    price: 4.49,
+    unit: '4 pcs',
+    description: 'Biodegradable bamboo handle toothbrushes with soft charcoal bristles.',
+    icon: Icons.sanitizer_rounded,
+    imageUrl:
+        'https://images.unsplash.com/photo-1559591937-e1032b4b4556?w=500&auto=format&fit=crop&q=80',
+  ),
+
+  // Other Essentials
+  GroceryItem(
+    id: 'oth_1',
+    name: 'Natural Spring Water',
+    quantity: 1,
+    category: categories[Categories.other]!,
+    price: 1.19,
+    unit: '1.5 Liter',
+    description: 'Pure, electrolyte-balanced mountain spring water.',
+    icon: Icons.water_drop_outlined,
+    imageUrl:
+        'https://images.unsplash.com/photo-1548839140-29a749e1bc4e?w=500&auto=format&fit=crop&q=80',
+  ),
 ];

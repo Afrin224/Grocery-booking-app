@@ -416,7 +416,10 @@ class _GroceryHomeScreenState extends State<GroceryHomeScreen> {
 
         final screens = [
           _buildShopTab(provider),
-          CartScreen(onBrowseCatalog: () => setState(() => _currentIndex = 0)),
+          CartScreen(
+            onBrowseCatalog: () => setState(() => _currentIndex = 0),
+            onViewBookings: () => setState(() => _currentIndex = 2),
+          ),
           const BookingsScreen(),
           const MyGroceryListScreen(),
           const ProfileScreen(),

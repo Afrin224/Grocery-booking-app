@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:first_app/providers/grocery_provider.dart';
+import 'package:first_app/screens/chat_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -32,6 +33,149 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 
+  void _showSavedAddresses(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (ctx) => Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  'Saved Addresses',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                IconButton(
+                  icon: const Icon(Icons.close),
+                  onPressed: () => Navigator.of(ctx).pop(),
+                ),
+              ],
+            ),
+            const SizedBox(height: 12),
+            ListTile(
+              leading: const Icon(Icons.home, color: Color(0xFF2ECC71)),
+              title: const Text('Home (Default)'),
+              subtitle: const Text('Flat 402, Green Meadows, 5th Main Rd'),
+              trailing: const Icon(Icons.check_circle, color: Color(0xFF2ECC71)),
+            ),
+            const Divider(),
+            ListTile(
+              leading: const Icon(Icons.work, color: Colors.blue),
+              title: const Text('Work'),
+              subtitle: const Text('Tower B, Tech Park, 3rd Floor'),
+            ),
+            const SizedBox(height: 16),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _showPaymentMethods(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (ctx) => Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  'Payment Methods',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                IconButton(
+                  icon: const Icon(Icons.close),
+                  onPressed: () => Navigator.of(ctx).pop(),
+                ),
+              ],
+            ),
+            const SizedBox(height: 12),
+            ListTile(
+              leading: const Icon(Icons.money, color: Colors.green),
+              title: const Text('Cash on Delivery'),
+              subtitle: const Text('Pay when your groceries arrive'),
+              trailing: const Icon(Icons.check_circle, color: Color(0xFF2ECC71)),
+            ),
+            const Divider(),
+            ListTile(
+              leading: const Icon(Icons.qr_code, color: Colors.purple),
+              title: const Text('UPI / Google Pay / PhonePe'),
+              subtitle: const Text('Instant contactless payment'),
+            ),
+            const Divider(),
+            ListTile(
+              leading: const Icon(Icons.credit_card, color: Colors.amber),
+              title: const Text('Credit & Debit Cards'),
+              subtitle: const Text('Visa, MasterCard, Rupay'),
+            ),
+            const SizedBox(height: 16),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _showNotificationSettings(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (ctx) => Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  'Notification Preferences',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                IconButton(
+                  icon: const Icon(Icons.close),
+                  onPressed: () => Navigator.of(ctx).pop(),
+                ),
+              ],
+            ),
+            const SizedBox(height: 12),
+            SwitchListTile(
+              value: true,
+              activeThumbColor: const Color(0xFF2ECC71),
+              title: const Text('Order Status & Delivery Updates'),
+              subtitle: const Text('Live tracking updates for your grocery deliveries'),
+              onChanged: (_) {},
+            ),
+            SwitchListTile(
+              value: true,
+              activeThumbColor: const Color(0xFF2ECC71),
+              title: const Text('Discounts & Flash Deals'),
+              subtitle: const Text('Weekly specials and seasonal grocery offers'),
+              onChanged: (_) {},
+            ),
+            const SizedBox(height: 16),
+          ],
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final user = FirebaseAuth.instance.currentUser;
@@ -40,7 +184,7 @@ class ProfileScreen extends StatelessWidget {
     final userEmail = user?.email ?? 'guest@freshmart.com';
     final userName = user?.displayName?.isNotEmpty == true
         ? user!.displayName!
-        : userEmail.split('@').first;
+        : (userEmail.contains('@') ? userEmail.split('@').first : 'Guest');
     final photoUrl = user?.photoURL;
 
     return SingleChildScrollView(
@@ -56,8 +200,8 @@ class ProfileScreen extends StatelessWidget {
                   radius: 50,
                   backgroundColor: const Color(0xFF1E824C),
                   backgroundImage:
-                      photoUrl != null ? NetworkImage(photoUrl) : null,
-                  child: photoUrl == null
+                      photoUrl != null && photoUrl.isNotEmpty ? NetworkImage(photoUrl) : null,
+                  child: photoUrl == null || photoUrl.isEmpty
                       ? Text(
                           userName.isNotEmpty
                               ? userName[0].toUpperCase()
@@ -182,15 +326,15 @@ class ProfileScreen extends StatelessWidget {
                   title: const Text('Saved Addresses'),
                   subtitle: const Text('2 saved addresses'),
                   trailing: const Icon(Icons.chevron_right),
-                  onTap: () {},
+                  onTap: () => _showSavedAddresses(context),
                 ),
                 const Divider(height: 1),
                 ListTile(
                   leading: const Icon(Icons.credit_card, color: Colors.green),
                   title: const Text('Payment Methods'),
-                  subtitle: const Text('Cards, UPI, Netbanking'),
+                  subtitle: const Text('Cards, UPI, Cash on Delivery'),
                   trailing: const Icon(Icons.chevron_right),
-                  onTap: () {},
+                  onTap: () => _showPaymentMethods(context),
                 ),
                 const Divider(height: 1),
                 ListTile(
@@ -198,15 +342,21 @@ class ProfileScreen extends StatelessWidget {
                   title: const Text('Delivery Notifications'),
                   subtitle: const Text('Order updates & promo alerts'),
                   trailing: const Icon(Icons.chevron_right),
-                  onTap: () {},
+                  onTap: () => _showNotificationSettings(context),
                 ),
                 const Divider(height: 1),
                 ListTile(
                   leading: const Icon(Icons.headset_mic_outlined, color: Colors.green),
-                  title: const Text('Customer Support'),
-                  subtitle: const Text('24x7 Help Center'),
+                  title: const Text('Customer Support Chat'),
+                  subtitle: const Text('24x7 FreshMart Help Center'),
                   trailing: const Icon(Icons.chevron_right),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (ctx) => const ChatScreen(),
+                      ),
+                    );
+                  },
                 ),
               ],
             ),

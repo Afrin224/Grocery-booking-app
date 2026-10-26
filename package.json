@@ -1,0 +1,29 @@
+{
+  "name": "grocery-booking-app",
+  "version": "1.0.0",
+  "private": true,
+  "description": "FreshMart - Grocery Booking & Order Flutter Web Application",
+  "scripts": {
+    "start": "serve build/web -l 3000",
+    "serve": "serve build/web -l 3000",
+    "build": "if command -v flutter > /dev/null; then flutter build web --release; elif [ ! -d \"flutter\" ]; then git clone https://github.com/flutter/flutter.git --depth 1 -b stable flutter && ./flutter/bin/flutter build web --release; else ./flutter/bin/flutter build web --release; fi",
+    "build:local": "flutter build web --release",
+    "launch": "flutter run -d chrome",
+    "launch:web": "flutter run -d web-server --web-port 8080 --web-hostname 0.0.0.0",
+    "test": "flutter test"
+  },
+  "dependencies": {
+    "serve": "^14.2.4"
+  },
+  "devDependencies": {
+    "vercel": "^39.0.0"
+  },
+  "keywords": [
+    "flutter",
+    "grocery-booking",
+    "freshmart",
+    "ecommerce"
+  ],
+  "author": "FreshMart Team",
+  "license": "MIT"
+}
