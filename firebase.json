@@ -1,0 +1,28 @@
+{
+  "firestore": {
+    "rules": "firestore.rules"
+  },
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "first-app-afrin",
+          "appId": "1:3147455194:android:4d558dce872908b90723e3",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "first-app-afrin",
+          "configurations": {
+            "android": "1:3147455194:android:4d558dce872908b90723e3",
+            "ios": "1:3147455194:ios:3a2db99bc4a55b480723e3",
+            "macos": "1:3147455194:ios:3a2db99bc4a55b480723e3",
+            "web": "1:3147455194:web:8c445b26f9bc6bbe0723e3",
+            "windows": "1:3147455194:web:2ae6ca1d0fdc877b0723e3"
+          }
+        }
+      }
+    }
+  }
+}

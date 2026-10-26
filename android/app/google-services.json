@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "3147455194",
+    "project_id": "first-app-afrin",
+    "storage_bucket": "first-app-afrin.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:3147455194:android:4d558dce872908b90723e3",
+        "android_client_info": {
+          "package_name": "com.example.first_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAVywFniyZ0kqD9saNi5swnhD6knl7TH1g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
